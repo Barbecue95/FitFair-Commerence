@@ -1,9 +1,5 @@
-import { Sidebar } from "lucide-react";
+import { SideBar } from "@/components/SideBar";
 
 export default function SellerPage() {
-  return (
-    <div>
-      <Sidebar />
-    </div>
-  );
+  return <SideBar />;
 }

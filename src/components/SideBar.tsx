@@ -1,12 +1,25 @@
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { Category } from "@mui/icons-material";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import SettingsIcon from "@mui/icons-material/Settings";
-import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
-import { Button, IconButton, Typography } from "@mui/material";
+import {
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { useRouter } from "next/router";
+import {
+  AlignEndVertical,
+  AlignStartVertical,
+  Boxes,
+  BriefcaseBusiness,
+  CircleUserRound,
+} from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 const sidebarItems = [
@@ -19,7 +32,7 @@ const sidebarItems = [
   {
     id: 2,
     label: "Orders",
-    icon: <ShoppingBagIcon />,
+    icon: <Boxes />,
     route: "/seller/orders",
   },
   {
@@ -30,6 +43,24 @@ const sidebarItems = [
   },
   {
     id: 4,
+    label: "Product Categories",
+    icon: <Category />,
+    route: "/seller/account",
+  },
+  {
+    id: 5,
+    label: "Brands",
+    icon: <BriefcaseBusiness />,
+    route: "/seller/account",
+  },
+  {
+    id: 6,
+    label: "Account",
+    icon: <CircleUserRound />,
+    route: "/seller/account",
+  },
+  {
+    id: 7,
     label: "Settings",
     icon: <SettingsIcon />,
     route: "/seller/settings",
@@ -39,61 +70,66 @@ const sidebarItems = [
 // Styled container for sidebar
 const SidebarContainer = styled("div")<{ collapsed: boolean }>(
   ({ collapsed }) => ({
-    width: collapsed ? "4rem" : "16rem",
+    width: collapsed ? "4rem" : "16rem", // Width of SideBar
     transition: "width 0.3s ease",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
     height: "100vh",
     borderRight: "1px solid #e0e0e0",
-    backgroundColor: "#f8f9fa", // Customize as needed
+    backgroundColor: "#f8f9fa", // Background Color of SideBar
   })
 );
 
-export function Sidebar() {
+export function SideBar() {
   const [collapsed, setCollapsed] = useState(false);
-  const router = useRouter();
 
   return (
     <SidebarContainer collapsed={collapsed}>
       {/* Sidebar Header */}
       <div className="p-4">
         <div
-          className={`flex items-center ${
-            collapsed ? "justify-center" : "justify-between"
-          }`}
+          className={`flex items-center ${collapsed ? "justify-center" : "justify-between"}`}
         >
           {!collapsed && (
             <Typography variant="h6" className="font-semibold">
-              Menu
+              FitFair
             </Typography>
           )}
-          <IconButton onClick={() => setCollapsed(!collapsed)}>
-            {collapsed ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          <IconButton
+            onClick={() => setCollapsed(!collapsed)}
+            sx={{ color: "#7c3aed" }}
+          >
+            {collapsed ? <AlignStartVertical /> : <AlignEndVertical />}
           </IconButton>
         </div>
       </div>
 
       {/* Sidebar Items */}
-      <div className="flex-grow space-y-2 overflow-y-auto mt-4">
+      <List className="flex-grow space-y-2  mt-4">
         {sidebarItems.map((item) => (
-          <Button
+          <Link
             key={item.id}
-            startIcon={item.icon}
-            fullWidth
-            onClick={() => router.push(item.route)}
-            className="justify-start"
+            href={item.route}
+            className="flex flex-col textDecoration:none, cursor-pointer"
           >
-            {!collapsed && <span>{item.label}</span>}
-          </Button>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon sx={{ color: "#7c3aed" }}>
+                  {item.icon}
+                </ListItemIcon>
+                {!collapsed && <ListItemText>{item.label}</ListItemText>}
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
-      </div>
+      </List>
 
       {/* Footer Section */}
       <div className="p-4">
         {!collapsed && (
-          <Typography variant="body2" className="text-xs text-gray-500">
-            © 2024 Your Company
+          <Typography variant="body2" className="text-xs text-slate-500">
+            © 2024 All right Served By FitFair
           </Typography>
         )}
       </div>

@@ -45,13 +45,13 @@ const sidebarItems = [
     id: 4,
     label: "Product Categories",
     icon: <Category />,
-    route: "/seller/account",
+    route: "/seller/product-categories",
   },
   {
     id: 5,
     label: "Brands",
     icon: <BriefcaseBusiness />,
-    route: "/seller/account",
+    route: "/seller/brands",
   },
   {
     id: 6,

@@ -92,9 +92,9 @@ export function SideBar() {
           className={`flex items-center ${collapsed ? "justify-center" : "justify-between"}`}
         >
           {!collapsed && (
-            <Typography variant="h6" className="font-semibold">
+            <Link href={"/seller"} className="font-light text-xl">
               FitFair
-            </Typography>
+            </Link>
           )}
           <IconButton
             onClick={() => setCollapsed(!collapsed)}

@@ -1,9 +1,9 @@
 import { SellerSideLayout } from "@/components/SellerSideLayout";
 
-export default function BrandsPage() {
+export default function HelpPage() {
   return (
     <SellerSideLayout>
-      <h1>Brands Page</h1>
+      <h1>Help&Center Page</h1>
     </SellerSideLayout>
   );
 }

@@ -1,9 +1,9 @@
 import { SellerSideLayout } from "@/components/SellerSideLayout";
 
-export default function Products() {
+export default function AnalyticsPage() {
   return (
     <SellerSideLayout>
-      <h1>Products Page</h1>
+      <h1>Analytics Page</h1>
     </SellerSideLayout>
   );
 }

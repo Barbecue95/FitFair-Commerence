@@ -1,4 +1,5 @@
-import { Category } from "@mui/icons-material";
+import DonutSmallIcon from "@mui/icons-material/DonutSmall";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
@@ -12,14 +13,9 @@ import {
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import {
-  AlignEndVertical,
-  AlignStartVertical,
-  Boxes,
-  BriefcaseBusiness,
-  CircleUserRound,
-} from "lucide-react";
+import { AlignEndVertical, AlignStartVertical, Boxes } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const sidebarItems = [
@@ -28,60 +24,62 @@ const sidebarItems = [
     label: "Dashboard",
     icon: <SpaceDashboardIcon />,
     route: "/seller/dashboard",
+    pathname: "dashboard",
   },
   {
     id: 2,
-    label: "Orders",
+    label: "Order Management",
     icon: <Boxes />,
-    route: "/seller/orders",
+    route: "/seller/orders-management",
+    pathname: "orders-management",
   },
   {
     id: 3,
-    label: "Products",
+    label: "Products Management",
     icon: <LocalMallIcon />,
-    route: "/seller/products",
+    route: "/seller/products-management",
+    pathname: "products-management",
   },
   {
     id: 4,
-    label: "Product Categories",
-    icon: <Category />,
-    route: "/seller/product-categories",
+    label: "Analytics",
+    icon: <DonutSmallIcon />,
+    route: "/seller/analytics",
+    pathname: "analytics",
   },
   {
     id: 5,
-    label: "Brands",
-    icon: <BriefcaseBusiness />,
-    route: "/seller/brands",
-  },
-  {
-    id: 6,
-    label: "Account",
-    icon: <CircleUserRound />,
-    route: "/seller/account",
-  },
-  {
-    id: 7,
     label: "Settings",
     icon: <SettingsIcon />,
     route: "/seller/settings",
+    pathname: "settings",
+  },
+  {
+    id: 6,
+    label: "Help & Center",
+    icon: <ErrorOutlineIcon />,
+    route: "/seller/help",
+    pathname: "help",
   },
 ];
 
 // Styled container for sidebar
 const SidebarContainer = styled("div")<{ collapsed: boolean }>(
   ({ collapsed }) => ({
-    width: collapsed ? "4rem" : "16rem", // Width of SideBar
+    width: collapsed ? "4rem" : "18rem", // Width of SideBar
     transition: "width 0.3s ease",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
+    justifyContent: collapsed ? "center" : "space-between",
     height: "100vh",
     borderRight: "1px solid #e0e0e0",
-    backgroundColor: "#f8f9fa", // Background Color of SideBar
+    backgroundColor: "#4A5E71", // Background Color of SideBar
+    color: "#ffff",
   })
 );
 
 export function SideBar() {
+  const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
 
   return (
@@ -98,7 +96,7 @@ export function SideBar() {
           )}
           <IconButton
             onClick={() => setCollapsed(!collapsed)}
-            sx={{ color: "#7c3aed" }}
+            sx={{ color: "#ffff" }}
           >
             {collapsed ? <AlignStartVertical /> : <AlignEndVertical />}
           </IconButton>
@@ -113,12 +111,26 @@ export function SideBar() {
             href={item.route}
             className="flex flex-col textDecoration:none, cursor-pointer"
           >
-            <ListItem disablePadding>
+            <ListItem
+              disablePadding
+              sx={{
+                bgcolor: pathname.includes(item.pathname) ? "#4A5E71" : null,
+              }}
+            >
               <ListItemButton>
-                <ListItemIcon sx={{ color: "#7c3aed" }}>
+                <ListItemIcon
+                  sx={{
+                    color: "#ffff",
+                  }}
+                >
                   {item.icon}
                 </ListItemIcon>
-                {!collapsed && <ListItemText>{item.label}</ListItemText>}
+                {!collapsed && (
+                  <ListItemText
+                    primary={item.label}
+                    sx={{ color: "#fff", fontWeight: "9000" }}
+                  ></ListItemText>
+                )}
               </ListItemButton>
             </ListItem>
           </Link>
@@ -128,7 +140,7 @@ export function SideBar() {
       {/* Footer Section */}
       <div className="p-4">
         {!collapsed && (
-          <Typography variant="body2" className="text-xs text-slate-500">
+          <Typography variant="body2" className="text-slate-300 font-medium">
             © 2024 All right Served By FitFair
           </Typography>
         )}

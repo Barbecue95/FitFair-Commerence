@@ -107,7 +107,7 @@ export function SideBar() {
           <Link
             key={item.id}
             href={item.route}
-            className="group flex flex-col textDecoration:none, cursor-pointer hover:bg-white mx-3 rounded-md hover:text-black text-white font-light"
+            className={`group flex flex-col textDecoration:none, cursor-pointer hover:bg-white rounded-lg hover:text-black text-white font-light ${!collapsed ? "mx-3" : 0}`}
           >
             <ListItem
               disablePadding

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { SideBar } from "./SideBar";
-import TopBar from "./TopBar";
+import { TopBar } from "./TopBar";
 
 interface Props {
   children: ReactNode;

@@ -8,8 +8,6 @@ import {
   List,
   ListItem,
   ListItemButton,
-  ListItemIcon,
-  ListItemText,
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -109,7 +107,7 @@ export function SideBar() {
           <Link
             key={item.id}
             href={item.route}
-            className="flex flex-col textDecoration:none, cursor-pointer"
+            className={`group flex flex-col textDecoration:none, cursor-pointer hover:bg-white rounded-lg hover:text-black text-white font-light ${!collapsed ? "mx-3" : 0}`}
           >
             <ListItem
               disablePadding
@@ -118,19 +116,10 @@ export function SideBar() {
               }}
             >
               <ListItemButton>
-                <ListItemIcon
-                  sx={{
-                    color: "#ffff",
-                  }}
-                >
+                <div className="text-white group-hover:text-black pr-5">
                   {item.icon}
-                </ListItemIcon>
-                {!collapsed && (
-                  <ListItemText
-                    primary={item.label}
-                    sx={{ color: "#fff", fontWeight: "9000" }}
-                  ></ListItemText>
-                )}
+                </div>
+                {!collapsed && <p className="font-md">{item.label}</p>}
               </ListItemButton>
             </ListItem>
           </Link>

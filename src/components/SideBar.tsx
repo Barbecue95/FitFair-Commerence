@@ -64,7 +64,7 @@ const sidebarItems = [
 // Styled container for sidebar
 const SidebarContainer = styled("div")<{ collapsed: boolean }>(
   ({ collapsed }) => ({
-    width: collapsed ? "4rem" : "18rem", // Width of SideBar
+    width: collapsed ? "4rem" : "20rem", // Width of SideBar
     transition: "width 0.3s ease",
     display: "flex",
     flexDirection: "column",
@@ -88,7 +88,7 @@ export function SideBar() {
           className={`flex items-center ${collapsed ? "justify-center" : "justify-between"}`}
         >
           {!collapsed && (
-            <Link href={"/seller"} className="font-light text-xl">
+            <Link href={"/seller"} className="font-bold text-2xl">
               FitFair
             </Link>
           )}

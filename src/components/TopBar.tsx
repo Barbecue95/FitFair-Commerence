@@ -11,16 +11,17 @@ const SearchContainer = styled("div")(({ theme }) => ({
   maxWidth: "500px",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: theme.palette.background.default,
+  border: "1px solid #f1f1f1",
   padding: theme.spacing(0.5, 2),
 }));
 
 const IconWrapper = styled("div")(({ theme }) => ({
   position: "absolute",
   left: theme.spacing(1),
-  color: theme.palette.text.secondary,
+  color: theme.palette.text.primary,
 }));
 
-export default function Component() {
+export function TopBar() {
   return (
     <header
       style={{
@@ -29,16 +30,16 @@ export default function Component() {
       }}
     >
       <Container maxWidth="lg">
-        <Box display="flex" alignItems="center" height={64} px={2} gap={2}>
+        <Box display="flex" alignItems="center" height={68} px={2} gap={2}>
           <Box flex={1}>
             <SearchContainer>
               <IconWrapper>
-                <Search fontSize="small" />
+                <Search fontSize="16px" />
               </IconWrapper>
               <InputBase
                 placeholder="Search"
                 inputProps={{ "aria-label": "search" }}
-                sx={{ pl: 4, width: "100%" }}
+                sx={{ pl: 4, width: "100%", color: "black" }}
               />
             </SearchContainer>
           </Box>

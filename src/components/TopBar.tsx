@@ -25,7 +25,6 @@ export function TopBar() {
   return (
     <header
       style={{
-        borderBottom: "1px solid",
         backgroundColor: "background.default",
       }}
     >

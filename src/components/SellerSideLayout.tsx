@@ -10,9 +10,9 @@ export function SellerSideLayout({ children }: Props) {
   return (
     <div className="flex">
       <SideBar />
-      <div className="w-full">
+      <div className="w-full h-[100vh] flex flex-col">
         <TopBar />
-        <div className="p-5">{children}</div>
+        <div className="p-5 bg-[#f1f1f1] flex-grow h-full">{children}</div>
       </div>
     </div>
   );

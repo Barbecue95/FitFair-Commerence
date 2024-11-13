@@ -129,7 +129,10 @@ export function SideBar() {
       {/* Footer Section */}
       <div className="p-4">
         {!collapsed && (
-          <Typography variant="body2" className="text-slate-300 font-medium">
+          <Typography
+            variant="body2"
+            className="text-slate-300 font-medium max-sm:hidden"
+          >
             © 2024 All right Served By FitFair
           </Typography>
         )}

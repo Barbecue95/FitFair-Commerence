@@ -88,16 +88,7 @@ export function TopBar() {
       <Box sx={{ position: "sticky" }}>
         <Toolbar className="max-w-7xl m-0 w-full p-0">
           {/* Desktop Menu */}
-          <Box
-            sx={{
-              display: { xs: "none", md: "flex" },
-              ml: 2,
-              flexGrow: 1,
-              justifyContent: "space-between",
-              alignItems: "center",
-              bgcolor: "white",
-            }}
-          >
+          <div className="hidden md:flex ml-2 w-full justify-between items-center bg-white">
             <Box
               sx={{
                 position: "relative",
@@ -144,26 +135,17 @@ export function TopBar() {
                 <User size={25} />
               </IconButton>
             </Box>
-          </Box>
+          </div>
 
           {/* Mobile menu button */}
-          <Box
-            sx={{
-              display: {
-                xs: "flex",
-                width: "100%",
-                justifyContent: "flex-end",
-                md: "none",
-              },
-            }}
-          >
+          <div className="hidden max-sm:flex w-full justify-end">
             <IconButton
               color="inherit"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X /> : <Menu />}
             </IconButton>
-          </Box>
+          </div>
         </Toolbar>
       </Box>
 

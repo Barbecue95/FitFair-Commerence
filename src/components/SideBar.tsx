@@ -82,58 +82,68 @@ export function SideBar() {
 
   return (
     <SidebarContainer collapsed={collapsed}>
-      {/* Sidebar Header */}
       <div className="p-4">
         <div
           className={`flex items-center ${collapsed ? "justify-center" : "justify-between"}`}
         >
           {!collapsed && (
-            <Link href={"/seller"} className="font-bold text-2xl">
+            <Link
+              href="/seller"
+              className="font-bold text-2xl text-white no-underline"
+            >
               FitFair
             </Link>
           )}
           <IconButton
             onClick={() => setCollapsed(!collapsed)}
             sx={{ color: "#ffff" }}
+            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
             {collapsed ? <AlignStartVertical /> : <AlignEndVertical />}
           </IconButton>
         </div>
       </div>
 
-      {/* Sidebar Items */}
-      <List className="flex-grow space-y-2  mt-4">
-        {sidebarItems.map((item) => (
-          <Link
-            key={item.id}
-            href={item.route}
-            className={`group flex flex-col textDecoration:none, cursor-pointer hover:bg-white rounded-lg hover:text-black text-white font-light ${!collapsed ? "mx-3" : 0}`}
-          >
-            <ListItem
-              disablePadding
-              sx={{
-                bgcolor: pathname.includes(item.pathname) ? "#4A5E71" : null,
-              }}
+      <List className="flex-grow space-y-2 mt-4">
+        {sidebarItems.map((item) => {
+          const isActive = pathname.includes(item.pathname);
+          return (
+            <Link
+              key={item.id}
+              href={item.route}
+              className={`group flex flex-col no-underline cursor-pointer ${!collapsed ? "mx-3" : ""}`}
             >
-              <ListItemButton>
-                <div className="text-white group-hover:text-black pr-5">
-                  {item.icon}
-                </div>
-                {!collapsed && <p className="font-md">{item.label}</p>}
-              </ListItemButton>
-            </ListItem>
-          </Link>
-        ))}
+              <ListItem
+                disablePadding
+                className={`rounded-lg transition-colors duration-200 ${
+                  isActive
+                    ? "bg-white text-black"
+                    : "text-white hover:bg-white hover:text-black"
+                }`}
+              >
+                <ListItemButton>
+                  <div
+                    className={`pr-5 ${isActive ? "text-black" : "text-white group-hover:text-black"}`}
+                  >
+                    {item.icon}
+                  </div>
+                  {!collapsed && (
+                    <p className="font-medium m-0">{item.label}</p>
+                  )}
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          );
+        })}
       </List>
 
-      {/* Footer Section */}
       <div className="p-4">
         {!collapsed && (
           <Typography
             variant="body2"
             className="text-slate-300 font-medium max-sm:hidden"
           >
-            © 2024 All right Served By FitFair
+            © 2024 All rights reserved by FitFair
           </Typography>
         )}
       </div>

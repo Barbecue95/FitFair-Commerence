@@ -22,7 +22,10 @@ export function TopBar() {
   return (
     <>
       <Box sx={{ position: "sticky" }}>
-        <Toolbar className="max-w-7xl m-0 w-full p-0">
+        <Toolbar className=" m-0 w-full p-0">
+          <h1 className="flex md:hidden justify-start font-bold text-2xl">
+            FitFair
+          </h1>
           {/* Desktop Menu */}
           <div className="hidden md:flex ml-2 w-full justify-between items-center bg-white">
             <Box

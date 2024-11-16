@@ -115,11 +115,11 @@ export function SideBar() {
             >
               <ListItem
                 disablePadding
-                className={`rounded-lg transition-colors duration-200 ${
+                className={`transition-colors duration-200 ${
                   isActive
-                    ? "bg-white text-black"
+                    ? "bg-[#f1f1f1] text-black"
                     : "text-white hover:bg-white hover:text-black"
-                }`}
+                } ${!collapsed && "rounded-lg"}`}
               >
                 <ListItemButton>
                   <div

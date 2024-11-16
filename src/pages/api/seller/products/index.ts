@@ -16,4 +16,5 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   } else if (method === "PUT") {
   } else if (method === "DELETE") {
   }
+  res.end();
 }

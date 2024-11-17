@@ -1,16 +1,9 @@
 import { SellerSideLayout } from "@/components/SellerSideLayout";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import Tiptap from "@/components/ui/Tiptap";
+import { Button } from "@/components/ui/button";
+import { FormField, FormItem } from "@/components/ui/form";
+import { RichTextEditor } from "@/components/ui/RichTextEditor";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box } from "@mui/material";
+import { Box, FormLabel } from "@mui/material";
 import { Roboto } from "next/font/google";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
@@ -20,23 +13,29 @@ const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500"] });
 
 export default function NewProductPage() {
   const formSchema = z.object({
-    title: z
+    productName: z
       .string()
-      .min(5, { message: "The tile is not long enough" })
-      .max(100, { message: "The title is too long." }),
-    price: z.number().min(5, { message: "Price must be number" }),
-    description: z.string().trim(),
+      .min(5, { message: "Product Name must contain at least 5 characters." })
+      .max(100, { message: "Product Name is too long." }),
+    price: z.number(),
+    description: z.string(),
   });
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    mode: "onChange",
+    mode: "onTouched",
     defaultValues: {
-      title: "",
+      productName: "",
       price: 0,
       description: "",
     },
   });
   const router = useRouter();
+
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    console.log(values);
+  };
+
   return (
     <SellerSideLayout>
       <div className="sm:flex sm:justify-between">
@@ -53,34 +52,24 @@ export default function NewProductPage() {
           </button>
         </Box>
       </div>
-      <Form {...form}>
-        <FormField
-          control={form.control}
-          name="title"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Product Name</FormLabel>
-              <FormControl>
-                <Input placeholder="Eg.Short sleeve wool shirt" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Product Name</FormLabel>
-              <FormControl>
-                <Tiptap description={field.name} onChange={field.onChange} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </Form>
+      <div className="max-w-3xl mx-auto py-5">
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <FormField
+            control={form.control}
+            name="productName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Description</FormLabel>
+                <RichTextEditor
+                  content={field.value}
+                  onChange={(value: string) => field.onChange(value)}
+                />
+              </FormItem>
+            )}
+          />
+          <Button className="mt-4">Submit</Button>
+        </form>
+      </div>
     </SellerSideLayout>
   );
 }

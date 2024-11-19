@@ -1,9 +1,10 @@
 import { SellerSideLayout } from "@/components/SellerSideLayout";
 import { Button } from "@/components/ui/button";
 import { FormField, FormItem } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { RichTextEditor } from "@/components/ui/RichTextEditor";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, FormLabel } from "@mui/material";
+import { Box } from "@mui/material";
 import { Roboto } from "next/font/google";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
@@ -52,14 +53,42 @@ export default function NewProductPage() {
           </button>
         </Box>
       </div>
-      <div className="max-w-3xl mx-auto py-5">
+      <div className="max-w-3xl py-5 bg-white p-3 rounded-md">
         <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="flex w-full justify-between gap-5 pb-3">
+            <div className="w-full">
+              <FormField
+                control={form.control}
+                name="productName"
+                render={({ field }) => (
+                  <FormItem>
+                    <p className=" text-black font-bold text-base">
+                      Product Name
+                    </p>
+                    <Input placeholder="Eg.Short Sleeve wool shirt" />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="w-full">
+              <FormField
+                control={form.control}
+                name="productName"
+                render={({ field }) => (
+                  <FormItem>
+                    <p className=" text-black font-bold text-base">SKU</p>
+                    <Input placeholder="Eg.CW1100" />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
           <FormField
             control={form.control}
-            name="productName"
+            name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description</FormLabel>
+                <p className=" text-black font-bold text-base">Description</p>
                 <RichTextEditor
                   content={field.value}
                   onChange={(value: string) => field.onChange(value)}
@@ -67,6 +96,7 @@ export default function NewProductPage() {
               </FormItem>
             )}
           />
+
           <Button className="mt-4">Submit</Button>
         </form>
       </div>

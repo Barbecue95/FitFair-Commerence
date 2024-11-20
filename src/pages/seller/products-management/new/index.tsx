@@ -1,3 +1,4 @@
+import { MultipleImageUpload } from "@/components/imageUpload";
 import { SellerSideLayout } from "@/components/SellerSideLayout";
 import { Button } from "@/components/ui/button";
 import { FormField, FormItem } from "@/components/ui/form";
@@ -53,52 +54,57 @@ export default function NewProductPage() {
           </button>
         </Box>
       </div>
-      <div className="max-w-3xl py-5 bg-white p-3 rounded-md">
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="flex w-full justify-between gap-5 pb-3">
-            <div className="w-full">
-              <FormField
-                control={form.control}
-                name="productName"
-                render={({ field }) => (
-                  <FormItem>
-                    <p className=" text-black font-bold text-base">
-                      Product Name
-                    </p>
-                    <Input placeholder="Eg.Short Sleeve wool shirt" />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="w-full">
-              <FormField
-                control={form.control}
-                name="productName"
-                render={({ field }) => (
-                  <FormItem>
-                    <p className=" text-black font-bold text-base">SKU</p>
-                    <Input placeholder="Eg.CW1100" />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <p className=" text-black font-bold text-base">Description</p>
-                <RichTextEditor
-                  content={field.value}
-                  onChange={(value: string) => field.onChange(value)}
+      <div className="flex gap-2 justify-between w-full max-md:flex-col">
+        <div className=" py-5 bg-white p-5 rounded-md w-[70%]">
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="flex w-full justify-between gap-5 pb-3">
+              <div className="w-full">
+                <FormField
+                  control={form.control}
+                  name="productName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <p className=" text-black font-bold text-base">
+                        Product Name
+                      </p>
+                      <Input placeholder="Eg.Short Sleeve wool shirt" />
+                    </FormItem>
+                  )}
                 />
-              </FormItem>
-            )}
-          />
+              </div>
+              <div className="w-full">
+                <FormField
+                  control={form.control}
+                  name="productName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <p className=" text-black font-bold text-base">SKU</p>
+                      <Input placeholder="Eg.CW1100" />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <p className=" text-black font-bold text-base">Description</p>
+                  <RichTextEditor
+                    content={field.value}
+                    onChange={(value: string) => field.onChange(value)}
+                  />
+                </FormItem>
+              )}
+            />
 
-          <Button className="mt-4">Submit</Button>
-        </form>
+            <Button className="mt-4">Submit</Button>
+          </form>
+        </div>
+        <div className="w-[30%]">
+          <MultipleImageUpload />
+        </div>
       </div>
     </SellerSideLayout>
   );

@@ -14,17 +14,29 @@ import { WebrtcProvider } from "y-webrtc";
 import * as Y from "yjs";
 import { ToolBar } from "./TooBar";
 
+// Declare custom property on the Window interface
+declare global {
+  interface Window {
+    webrtcProvider?: WebrtcProvider;
+  }
+}
+
 const yDocs = new Map();
 
-// Check if the Y.Doc exists, or create it
 if (!yDocs.has("tip-test")) {
   yDocs.set("tip-test", new Y.Doc());
 }
 
-// Retrieve the Y.Doc
-const ydoc = yDocs.get("tip-test");
-
-const provider = new WebrtcProvider("tip-test", ydoc);
+// Ensure code runs only on the client side
+let provider: WebrtcProvider | undefined;
+if (typeof window !== "undefined") {
+  if (!window.webrtcProvider) {
+    provider = new WebrtcProvider("tip-test", yDocs.get("tip-test"));
+    window.webrtcProvider = provider;
+  } else {
+    provider = window.webrtcProvider;
+  }
+}
 
 export function RichTextEditor({
   content,
@@ -33,11 +45,12 @@ export function RichTextEditor({
   content: string;
   onChange: (richText: string) => void;
 }) {
+  // Only initialize the editor on the client side
   const editor = useEditor({
     extensions: [
       StarterKit.configure(),
       Collaboration.configure({
-        document: ydoc,
+        document: yDocs.get("tip-test"), // Use the existing Y.Doc
       }),
       TextAlign.configure({
         types: ["heading", "paragraph"],
@@ -66,7 +79,7 @@ export function RichTextEditor({
     },
     editorProps: {
       attributes: {
-        class: "min-h-[156px] border rounded-md bg-slate-50 py-2",
+        class: "min-h-[156px] border rounded-md bg-slate-50 p-2",
       },
     },
   });

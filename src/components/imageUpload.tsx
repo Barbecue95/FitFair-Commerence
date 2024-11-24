@@ -3,6 +3,7 @@
 import { ChevronLeft, ChevronRight, UploadCloud, X } from "lucide-react";
 import React, { useRef, useState } from "react";
 import { useSwipeable } from "react-swipeable";
+import { SampleImageDiv } from "./sampleImage";
 
 export function MultipleImageUpload() {
   const [files, setFiles] = useState<File[]>([]);
@@ -107,8 +108,8 @@ export function MultipleImageUpload() {
   });
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-semibold mb-4">Upload Images</h2>
+    <div className="w-full max-w-md mx-auto p-4 bg-white rounded-lg shadow-md">
+      <h2 className="text-xl font-semibold mb-4">Upload Images</h2>
       <div
         className={`relative border-2 border-dashed rounded-lg p-8 mb-4 text-center cursor-pointer transition-colors ${
           dragActive ? "border-primary bg-primary/5" : "border-gray-300"
@@ -133,9 +134,7 @@ export function MultipleImageUpload() {
           <UploadCloud className="h-12 w-12 text-blue-400" />
           <div className="text-sm">
             <span className="font-semibold">Drag your file(s) or </span>
-            <span className="text-primary font-semibold text-blue-400">
-              browse
-            </span>
+            <span className="font-semibold text-blue-400">browse</span>
           </div>
           <p className="text-xs text-gray-500">Max 10 MB per file</p>
         </div>
@@ -147,7 +146,7 @@ export function MultipleImageUpload() {
         </div>
       )}
 
-      {files.length > 0 && (
+      {files.length > 0 ? (
         <div className="mt-4">
           <div className="relative" {...handlers}>
             <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
@@ -211,6 +210,10 @@ export function MultipleImageUpload() {
               ))}
             </div>
           </div>
+        </div>
+      ) : (
+        <div className="mt-4">
+          <SampleImageDiv />
         </div>
       )}
     </div>

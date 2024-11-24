@@ -1,6 +1,5 @@
 import { MultipleImageUpload } from "@/components/imageUpload";
 import { SellerSideLayout } from "@/components/SellerSideLayout";
-import { Button } from "@/components/ui/button";
 import { FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RichTextEditor } from "@/components/ui/RichTextEditor";
@@ -40,23 +39,23 @@ export default function NewProductPage() {
 
   return (
     <SellerSideLayout>
-      <div className="sm:flex sm:justify-between">
-        <h1 className={`${roboto.className} text-3xl font-medium my-3 pb-3`}>
-          Create a New Product
-        </h1>
-        <Box>
-          <button
-            onClick={() => router.push("/seller/products-management")}
-            className="flex shrink-0 bg-[#586E86] text-white px-3 py-1 rounded-md items-center"
-          >
-            <div className="mr-1 text-2xl">+</div>
-            <div className="text-sm">New Product</div>
-          </button>
-        </Box>
-      </div>
-      <div className="flex gap-2 justify-between w-full max-md:flex-col">
-        <div className=" py-5 bg-white p-5 rounded-md w-[70%]">
-          <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <div className="sm:flex sm:justify-between">
+          <h1 className={`${roboto.className} text-3xl font-medium my-3 pb-3`}>
+            Create a New Product
+          </h1>
+          <Box>
+            <button
+              onClick={() => router.push("/seller/products-management")}
+              className="flex shrink-0 bg-[#586E86] text-white px-3 py-1 rounded-md items-center"
+            >
+              <div className="mr-1 text-2xl">+</div>
+              <div className="text-sm">Save</div>
+            </button>
+          </Box>
+        </div>
+        <div className="flex gap-2 justify-between w-full max-md:flex-col">
+          <div className=" bg-white p-5 rounded-md w-[70%]">
             <div className="flex w-full justify-between gap-5 pb-3">
               <div className="w-full">
                 <FormField
@@ -98,14 +97,43 @@ export default function NewProductPage() {
                 </FormItem>
               )}
             />
-
-            <Button className="mt-4">Submit</Button>
-          </form>
+            <div className="mt-4 flex gap-4">
+              <div className="w-full">
+                <p className="text-xl pb-2">Size</p>
+                <div className="grid grid-cols-4 gap-2">
+                  <button className="py-2 px-4 border-2 rounded-lg text-[12px]">
+                    XS
+                  </button>
+                  <button className="py-2 px-4 border-2 rounded-lg text-[12px]">
+                    S
+                  </button>
+                  <button className="py-2 px-4 border-2 rounded-lg text-[12px]">
+                    M
+                  </button>
+                  <button className="py-2 px-4 border-2 rounded-lg text-[12px]">
+                    L
+                  </button>
+                  <button className="py-2 px-4 border-2 rounded-lg text-[12px]">
+                    XL
+                  </button>
+                  <button className="py-2 px-4 border-2 rounded-lg text-[12px]">
+                    XXL
+                  </button>
+                  <button className="py-2 px-4 border-2 rounded-lg text-[12px]">
+                    XXXL
+                  </button>
+                </div>
+              </div>
+              <div>
+                <h1>Color</h1>
+              </div>
+            </div>
+          </div>
+          <div className="w-[30%]">
+            <MultipleImageUpload />
+          </div>
         </div>
-        <div className="w-[30%]">
-          <MultipleImageUpload />
-        </div>
-      </div>
+      </form>
     </SellerSideLayout>
   );
 }

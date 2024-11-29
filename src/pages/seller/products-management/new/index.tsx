@@ -98,33 +98,33 @@ export default function NewProductPage() {
               )}
             />
             <div className="mt-4 flex gap-4">
-              <div className="w-full">
+              <div className="w-[50%]">
                 <p className="text-xl pb-2">Size</p>
                 <div className="grid grid-cols-4 gap-2">
-                  <button className="py-2 px-4 border-2 rounded-lg text-[12px]">
+                  <button className="p-2 border-2 rounded-lg text-[12px]">
                     XS
                   </button>
-                  <button className="py-2 px-4 border-2 rounded-lg text-[12px]">
+                  <button className="p-2 border-2 rounded-lg text-[12px]">
                     S
                   </button>
-                  <button className="py-2 px-4 border-2 rounded-lg text-[12px]">
+                  <button className="p-2 border-2 rounded-lg text-[12px]">
                     M
                   </button>
-                  <button className="py-2 px-4 border-2 rounded-lg text-[12px]">
+                  <button className="p-2 border-2 rounded-lg text-[12px]">
                     L
                   </button>
-                  <button className="py-2 px-4 border-2 rounded-lg text-[12px]">
+                  <button className="p-2 border-2 rounded-lg text-[12px]">
                     XL
                   </button>
-                  <button className="py-2 px-4 border-2 rounded-lg text-[12px]">
+                  <button className="p-2 border-2 rounded-lg text-[12px]">
                     XXL
                   </button>
-                  <button className="py-2 px-4 border-2 rounded-lg text-[12px]">
+                  <button className="p-2 border-2 rounded-lg text-[12px]">
                     XXXL
                   </button>
                 </div>
               </div>
-              <div>
+              <div className="w-[50%]">
                 <h1>Color</h1>
               </div>
             </div>

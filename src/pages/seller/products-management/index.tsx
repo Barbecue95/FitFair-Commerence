@@ -2,11 +2,8 @@ import { SellerSideLayout } from "@/components/SellerSideLayout";
 import { config } from "@/config";
 import { Search } from "@mui/icons-material";
 import { Box, InputBase } from "@mui/material";
-import { Roboto } from "next/font/google";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-
-const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500"] });
 
 export interface Products {
   id: number;
@@ -31,9 +28,7 @@ export default function Products() {
 
   return (
     <SellerSideLayout>
-      <h1 className={`${roboto.className} text-3xl font-medium my-3 pb-3`}>
-        Products Details List
-      </h1>
+      <h1 className="text-3xl font-medium my-3 pb-3">Products Details List</h1>
       <div className="w-full bg-white flex justify-between p-4 rounded-t-lg max-sm:flex-col gap-2">
         <div className="relative flex items-center border border-[#c2c3c4] max-w-[500px] md:w-[500px] rounded-md h-11">
           <Search

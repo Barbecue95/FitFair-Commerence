@@ -5,12 +5,9 @@ import { Input } from "@/components/ui/input";
 import { RichTextEditor } from "@/components/ui/RichTextEditor";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box } from "@mui/material";
-import { Roboto } from "next/font/google";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-
-const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500"] });
 
 export default function NewProductPage() {
   const formSchema = z.object({
@@ -41,7 +38,7 @@ export default function NewProductPage() {
     <SellerSideLayout>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="sm:flex sm:justify-between">
-          <h1 className={`${roboto.className} text-3xl font-medium my-3 pb-3`}>
+          <h1 className="text-3xl font-medium my-3 pb-3">
             Create a New Product
           </h1>
           <Box>

@@ -1,4 +1,3 @@
-import DateTimePickerValue from "@/components/dateTimePicker";
 import { MultipleImageUpload } from "@/components/imageUpload";
 import { SellerSideLayout } from "@/components/SellerSideLayout";
 import { Button } from "@/components/ui/button";
@@ -30,8 +29,13 @@ export default function NewProductPage() {
       .string()
       .min(5, { message: "Product Name must contain at least 5 characters." })
       .max(100, { message: "Product Name is too long." }),
-    price: z.number(),
+    sku: z
+      .string()
+      .min(1, { message: "SKU must contain at least one character." }),
     description: z.string(),
+    price: z.number(),
+    publish: z.boolean(),
+    quantity: z.number(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -64,11 +68,13 @@ export default function NewProductPage() {
           <h1 className="text-3xl font-medium my-3 pb-3">Create New Product</h1>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <button
-              onClick={() => router.push("/seller/products-management")}
+              onClick={() =>
+                router.push("/seller/products-management/new/options")
+              }
               className="flex shrink-0 bg-[#586E86] text-white px-3 py-1 rounded-md items-center"
             >
               <div className="mr-1 text-2xl">+</div>
-              <div className="text-sm">Save</div>
+              <div className="text-sm">Next</div>
             </button>
           </Box>
         </div>
@@ -101,11 +107,19 @@ export default function NewProductPage() {
                 <div className="w-full">
                   <FormField
                     control={form.control}
-                    name="productName"
+                    name="sku"
                     render={({ field }) => (
                       <FormItem>
                         <p className=" text-black font-bold text-base">SKU</p>
-                        <Input placeholder="Eg.CW1100" />
+                        <Input
+                          placeholder="Eg.CW1100"
+                          onChange={(e) =>
+                            setNewProduct({
+                              ...newProduct,
+                              sku: e.target.value,
+                            })
+                          }
+                        />
                       </FormItem>
                     )}
                   />
@@ -121,7 +135,12 @@ export default function NewProductPage() {
                     </p>
                     <RichTextEditor
                       content={field.value}
-                      onChange={(value: string) => field.onChange(value)}
+                      onChange={(e) =>
+                        setNewProduct({
+                          ...newProduct,
+                          description: e,
+                        })
+                      }
                     />
                   </FormItem>
                 )}
@@ -139,10 +158,32 @@ export default function NewProductPage() {
                           onChange={(e) =>
                             setNewProduct({
                               ...newProduct,
-                              name: e.target.value,
+                              price: Number(e.target.value),
                             })
                           }
                         />
+                        <div className="w-full">
+                          <FormField
+                            control={form.control}
+                            name="quantity"
+                            render={({ field }) => (
+                              <FormItem>
+                                <p className=" text-black font-bold text-base">
+                                  Quantity
+                                </p>
+                                <Input
+                                  placeholder="10"
+                                  onChange={(e) =>
+                                    setNewProduct({
+                                      ...newProduct,
+                                      quantity: Number(e.target.value),
+                                    })
+                                  }
+                                />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
                         <div className="w-[80%]">
                           <p className=" text-black font-bold text-base mt-2">
                             Size
@@ -187,7 +228,6 @@ export default function NewProductPage() {
                             </button>
                           </div>
                         </div>
-                        <DateTimePickerValue />
                       </FormItem>
                     )}
                   />

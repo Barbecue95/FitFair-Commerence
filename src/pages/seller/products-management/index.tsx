@@ -8,7 +8,10 @@ import { useEffect, useState } from "react";
 export interface Products {
   id: number;
   name: string;
-  inStock: boolean;
+  sku: string;
+  price: number;
+  description: string;
+  publish: boolean;
   quantity: number;
 }
 

@@ -8,11 +8,13 @@ interface Props {
 
 export function SellerSideLayout({ children }: Props) {
   return (
-    <div className="flex">
-      <SideBar />
+    <div className="flex h-[100vh]">
+      <div className="max-sm:hidden h-[100vh]">
+        <SideBar />
+      </div>
       <div className="w-full h-[100vh] flex flex-col">
         <TopBar />
-        <div className="p-5 bg-[#f1f1f1] flex-grow h-full">{children}</div>
+        <div className="px-5 bg-[#f1f1f1] flex-grow h-[100vh]">{children}</div>
       </div>
     </div>
   );

@@ -112,7 +112,7 @@ export function MultipleImageUpload() {
       <h2 className="text-xl font-semibold mb-4">Upload Images</h2>
       <div
         className={`relative border-2 border-dashed rounded-lg p-8 mb-4 text-center cursor-pointer transition-colors ${
-          dragActive ? "border-primary bg-primary/5" : "border-gray-300"
+          dragActive ? "border-primary bg-primary/5" : "border-blue-400"
         }`}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}

@@ -1,10 +1,12 @@
+import DateTimePickerValue from "@/components/dateTimePicker";
 import { MultipleImageUpload } from "@/components/imageUpload";
 import { SellerSideLayout } from "@/components/SellerSideLayout";
+import { Button } from "@/components/ui/button";
 import { FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RichTextEditor } from "@/components/ui/RichTextEditor";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, Button, Checkbox, FormControlLabel } from "@mui/material";
+import { Box, Checkbox, FormControlLabel } from "@mui/material";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -12,7 +14,15 @@ import * as z from "zod";
 import { Products } from "..";
 
 export default function NewProductPage() {
-  const defaultProduct = { id: 1, name: "", inStock: true, quantity: 0 };
+  const defaultProduct = {
+    id: 1,
+    name: "",
+    sku: "",
+    price: 0,
+    description: "",
+    publish: true,
+    quantity: 0,
+  };
   const router = useRouter();
   const [newProduct, setNewProduct] = useState<Products>(defaultProduct);
   const formSchema = z.object({
@@ -36,6 +46,16 @@ export default function NewProductPage() {
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     console.log(values);
   };
+
+  const sizes = [
+    { id: 1, size: "XS" },
+    { id: 2, size: "S" },
+    { id: 3, size: "M" },
+    { id: 4, size: "L" },
+    { id: 5, size: "XL" },
+    { id: 6, size: "XXL" },
+    { id: 7, size: "XXXL" },
+  ];
 
   return (
     <SellerSideLayout>
@@ -106,65 +126,76 @@ export default function NewProductPage() {
                   </FormItem>
                 )}
               />
-              <div className="mt-4 flex gap-4">
-                <div className="w-[50%]">
-                  <p className="text-xl pb-2">Size</p>
-                </div>
-                <div className="w-[50%]">
-                  <h1>Color</h1>
-                </div>
-              </div>
-              <div>
-                <FormControlLabel
-                  control={<Checkbox defaultChecked />}
-                  label="inStock"
-                />
-              </div>
-            </div>
-            <div className="w-[30%] max-sm:hidden">
-              <MultipleImageUpload />
-            </div>
-          </div>
-          <div className=" bg-white p-5 rounded-md sm:w-[70%] w-full mt-4 flex justify-between">
-            <div className="flex w-full justify-between gap-5 pb-3 max-md:flex-col">
-              <div className="w-full">
-                <FormField
-                  control={form.control}
-                  name="price"
-                  render={({ field }) => (
-                    <FormItem>
-                      <p className=" text-black font-bold text-base">Price</p>
-                      <Input
-                        placeholder="10000 MMK"
-                        onChange={(e) =>
-                          setNewProduct({
-                            ...newProduct,
-                            name: e.target.value,
-                          })
-                        }
-                      />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="w-full">
-                <div className="w-[80%]">
+              <div className="flex w-full justify-between gap-5 max-md:flex-col mt-3">
+                <div className="w-full">
                   <FormField
                     control={form.control}
                     name="price"
                     render={({ field }) => (
                       <FormItem>
-                        <p className=" text-black font-bold text-base">SKU</p>
-                        <div className="flex w-full">
-                          <Input placeholder="10 %" className="w-full" />
-                          <Button>$</Button>
-                          <Button>%</Button>
+                        <p className=" text-black font-bold text-base">Price</p>
+                        <Input
+                          placeholder="10000 MMK"
+                          onChange={(e) =>
+                            setNewProduct({
+                              ...newProduct,
+                              name: e.target.value,
+                            })
+                          }
+                        />
+                        <div className="w-[80%]">
+                          <p className=" text-black font-bold text-base mt-2">
+                            Size
+                          </p>
+                          <div className="grid grid-cols-4 gap-2 py-2">
+                            {sizes.map((item) => (
+                              <Button
+                                variant="outline"
+                                key={item.id}
+                                className="flex"
+                              >
+                                {item.size}
+                              </Button>
+                            ))}
+                          </div>
                         </div>
+                      </FormItem>
+                    )}
+                  />
+                  <FormControlLabel
+                    control={<Checkbox defaultChecked />}
+                    label="Publish"
+                  />
+                </div>
+                <div className="w-full">
+                  <FormField
+                    control={form.control}
+                    name="price"
+                    render={({ field }) => (
+                      <FormItem>
+                        <p className=" text-black font-bold text-base">
+                          Discount
+                        </p>
+                        <div className="flex justify-between gap-1">
+                          <Input placeholder="100 MMK" />
+                          <div className="bg-[#DDE1EB] flex w-[30%] gap-2 px-2 py-1 rounded-md">
+                            <button className="bg-black text-white text-xs w-[50%] rounded-sm">
+                              %
+                            </button>
+                            <button className="text-black text-xs w-[50%] rounded-sm">
+                              $
+                            </button>
+                          </div>
+                        </div>
+                        <DateTimePickerValue />
                       </FormItem>
                     )}
                   />
                 </div>
               </div>
+            </div>
+            <div className="w-[30%] max-sm:hidden">
+              <MultipleImageUpload />
             </div>
           </div>
         </div>

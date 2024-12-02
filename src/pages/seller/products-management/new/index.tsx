@@ -64,7 +64,7 @@ export default function NewProductPage() {
   return (
     <SellerSideLayout>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex justify-between">
+        <div className="flex justify-between h-[100%]">
           <h1 className="text-3xl font-medium my-3 pb-3">Create New Product</h1>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <button
@@ -145,93 +145,67 @@ export default function NewProductPage() {
                   </FormItem>
                 )}
               />
-              <div className="flex w-full justify-between gap-5 max-md:flex-col mt-3">
-                <div className="w-full">
-                  <FormField
-                    control={form.control}
-                    name="price"
-                    render={({ field }) => (
-                      <FormItem>
-                        <p className=" text-black font-bold text-base">Price</p>
-                        <Input
-                          placeholder="10000 MMK"
-                          onChange={(e) =>
-                            setNewProduct({
-                              ...newProduct,
-                              price: Number(e.target.value),
-                            })
-                          }
-                        />
-                        <div className="w-full">
-                          <FormField
-                            control={form.control}
-                            name="quantity"
-                            render={({ field }) => (
-                              <FormItem>
-                                <p className=" text-black font-bold text-base">
-                                  Quantity
-                                </p>
-                                <Input
-                                  placeholder="10"
-                                  onChange={(e) =>
-                                    setNewProduct({
-                                      ...newProduct,
-                                      quantity: Number(e.target.value),
-                                    })
-                                  }
-                                />
-                              </FormItem>
-                            )}
-                          />
-                        </div>
-                        <div className="w-[80%]">
-                          <p className=" text-black font-bold text-base mt-2">
-                            Size
+              <div className="flex-col justify-between gap-5 mt-3">
+                <div className="flex w-full justify-between gap-5 pb-3 max-md:flex-col">
+                  <div className="w-full">
+                    <FormField
+                      control={form.control}
+                      name="price"
+                      render={({ field }) => (
+                        <FormItem>
+                          <p className=" text-black font-bold text-base">
+                            Price
                           </p>
-                          <div className="grid grid-cols-4 gap-2 py-2">
-                            {sizes.map((item) => (
-                              <Button
-                                variant="outline"
-                                key={item.id}
-                                className="flex"
-                              >
-                                {item.size}
-                              </Button>
-                            ))}
-                          </div>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-                  <FormControlLabel
-                    control={<Checkbox defaultChecked />}
-                    label="Publish"
-                  />
+                          <Input
+                            placeholder="10000 MMK"
+                            onChange={(e) =>
+                              setNewProduct({
+                                ...newProduct,
+                                price: Number(e.target.value),
+                              })
+                            }
+                          />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="w-full">
+                    <FormField
+                      control={form.control}
+                      name="quantity"
+                      render={({ field }) => (
+                        <FormItem>
+                          <p className=" text-black font-bold text-base">
+                            Quantity
+                          </p>
+                          <Input
+                            placeholder="10"
+                            onChange={(e) =>
+                              setNewProduct({
+                                ...newProduct,
+                                quantity: Number(e.target.value),
+                              })
+                            }
+                          />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                 </div>
                 <div className="w-full">
-                  <FormField
-                    control={form.control}
-                    name="price"
-                    render={({ field }) => (
-                      <FormItem>
-                        <p className=" text-black font-bold text-base">
-                          Discount
-                        </p>
-                        <div className="flex justify-between gap-1">
-                          <Input placeholder="100 MMK" />
-                          <div className="bg-[#DDE1EB] flex w-[30%] gap-2 px-2 py-1 rounded-md">
-                            <button className="bg-black text-white text-xs w-[50%] rounded-sm">
-                              %
-                            </button>
-                            <button className="text-black text-xs w-[50%] rounded-sm">
-                              $
-                            </button>
-                          </div>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
+                  <p className=" text-black font-bold text-base mt-2">Size</p>
+                  <div className="grid grid-cols-10 gap-2 py-2">
+                    {sizes.map((item) => (
+                      <Button variant="outline" key={item.id} className="flex">
+                        {item.size}
+                      </Button>
+                    ))}
+                  </div>
                 </div>
+                <FormControlLabel
+                  control={<Checkbox defaultChecked />}
+                  label="Publish"
+                />
               </div>
             </div>
             <div className="w-[30%] max-sm:hidden">
